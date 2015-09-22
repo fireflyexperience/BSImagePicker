@@ -82,7 +82,7 @@ final class AlbumCellFactory : TableViewCellFactory {
                     cell.thirdImageView.image = nil
                 } else {
                     let indexes = NSIndexSet(indexesInRange: NSMakeRange(0, 3))
-                    result.enumerateObjectsAtIndexes(indexes, options: nil, usingBlock: { (object, idx, stop) in
+                    result.enumerateObjectsAtIndexes(indexes, options: [], usingBlock: { (object, idx, stop) in
                         switch idx {
                         case 0:
                             if let asset = object as? PHAsset {

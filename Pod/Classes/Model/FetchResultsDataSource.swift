@@ -39,76 +39,145 @@ final class FetchResultsDataSource : NSObject, SelectableDataSource, PHPhotoLibr
             var indexPaths: [NSIndexPath] = []
             
             for object in selections {
-                for (resultIndex, fetchResult) in enumerate(fetchResults) {
+                for (resultIndex, fetchResult) in fetchResults.enumerate() {
+
                     let index = fetchResult.indexOfObject(object)
+
                     if index != NSNotFound {
+
                         let indexPath = NSIndexPath(forItem: index, inSection: resultIndex)
+
                         indexPaths.append(indexPath)
+
                     }
+
                 }
+
             }
+
             
+
             return indexPaths
+
         }
+
     }
+
     
+
     convenience init(fetchResult: PHFetchResult) {
+
         self.init(fetchResults: [fetchResult])
+
     }
+
     
+
     required init(fetchResults: [PHFetchResult]) {
+
         self.fetchResults = fetchResults
+
         
+
         super.init()
+
         
+
         PHPhotoLibrary.sharedPhotoLibrary().registerChangeObserver(self)
+
     }
+
     
+
     deinit {
+
         PHPhotoLibrary.sharedPhotoLibrary().unregisterChangeObserver(self)
+
     }
+
     
+
     // MARK: SelectableDataSource
+
     var sections: Int {
+
         get {
-            return count(fetchResults)
+
+            return fetchResults.count
+
         }
+
     }
+
     
+
     func numberOfObjectsInSection(section: Int) -> Int {
+
         return fetchResults[section].count
+
     }
+
     
+
     func objectAtIndexPath(indexPath: NSIndexPath) -> PHObject {
+
         return fetchResults[indexPath.section][indexPath.row] as! PHObject
+
     }
+
     
+
     func selectObjectAtIndexPath(indexPath: NSIndexPath) {
+
         if isObjectAtIndexPathSelected(indexPath) == false && selections.count < maxNumberOfSelections {
+
             if allowsMultipleSelection == false {
+
                 selections.removeAll(keepCapacity: true)
+
             }
+
             
+
             selections.append(objectAtIndexPath(indexPath))
+
         }
+
     }
+
     
+
     func deselectObjectAtIndexPath(indexPath: NSIndexPath) {
+
         let object = objectAtIndexPath(indexPath)
-        if let index = find(selections, object) {
+
+        if let index = selections.indexOf(object) {
+
             selections.removeAtIndex(index)
+
         }
+
     }
+
     
+
     func isObjectAtIndexPathSelected(indexPath: NSIndexPath) -> Bool {
+
         let object = objectAtIndexPath(indexPath)
+
         
-        return contains(selections, object)
+
+        return selections.contains(object)
+
     }
+
     
+
     // MARK: PHPhotoLibraryChangeObserver
-    func photoLibraryDidChange(changeInstance: PHChange!) {
-        for (index, fetchResult) in enumerate(fetchResults) {
+
+    func photoLibraryDidChange(changeInstance: PHChange) {
+
+        for (index, fetchResult) in fetchResults.enumerate() {
             // Check if there are changes to our fetch result
             if let collectionChanges = changeInstance.changeDetailsForFetchResult(fetchResult) {
                 // Get the new fetch result
@@ -127,9 +196,9 @@ final class FetchResultsDataSource : NSObject, SelectableDataSource, PHPhotoLibr
                 
                 if incrementalChange {
                     // Incremental change, tell delegate what has been deleted, inserted and changed
-                    removedIndexPaths = indexPathsFromIndexSet(collectionChanges.removedIndexes, inSection: index)
-                    insertedIndexPaths = indexPathsFromIndexSet(collectionChanges.insertedIndexes, inSection: index)
-                    changedIndexPaths = indexPathsFromIndexSet(collectionChanges.changedIndexes, inSection: index)
+                    removedIndexPaths = indexPathsFromIndexSet(collectionChanges.removedIndexes!, inSection: index)
+                    insertedIndexPaths = indexPathsFromIndexSet(collectionChanges.insertedIndexes!, inSection: index)
+                    changedIndexPaths = indexPathsFromIndexSet(collectionChanges.changedIndexes!, inSection: index)
                 } else {
                     // No incremental change. Set empty arrays
                     removedIndexPaths = []

@@ -21,13 +21,12 @@
 // SOFTWARE.
 
 import UIKit
-import UIImageViewModeScaleAspect
 
 final class ZoomAnimator : NSObject, UIViewControllerAnimatedTransitioning {
     var sourceImageView: UIImageView?
     var destinationImageView: UIImageView?
     
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return 0.3
     }
     
@@ -45,13 +44,13 @@ final class ZoomAnimator : NSObject, UIViewControllerAnimatedTransitioning {
             destinationImageView.hidden = true
             toViewController.view.alpha = 0.0
             fromViewController.view.alpha = 1.0
-            containerView.backgroundColor = toViewController.view.backgroundColor
+            containerView!.backgroundColor = toViewController.view.backgroundColor
             
             // Setup scaling image
-            let scalingFrame = containerView.convertRect(sourceImageView.frame, fromView: sourceImageView.superview)
+            let scalingFrame = containerView!.convertRect(sourceImageView.frame, fromView: sourceImageView.superview)
             let scalingImage = UIImageViewModeScaleAspect(frame: scalingFrame)
             scalingImage.contentMode = sourceImageView.contentMode
-            scalingImage.image = sourceImageView.image
+            scalingImage.image = sourceImageView.image!
             
             //Init image scale
             let destinationFrame = toViewController.view.convertRect(destinationImageView.bounds, fromView: destinationImageView.superview)
@@ -62,8 +61,8 @@ final class ZoomAnimator : NSObject, UIViewControllerAnimatedTransitioning {
             }
             
             // Add views to container view
-            containerView.addSubview(toViewController.view)
-            containerView.addSubview(scalingImage)
+            containerView!.addSubview(toViewController.view)
+            containerView!.addSubview(scalingImage)
             
             // Animate
             UIView.animateWithDuration(transitionDuration(transitionContext),

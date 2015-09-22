@@ -33,16 +33,25 @@ final class PreviewViewController : UIViewController {
         
         imageView = UIImageView(frame: view.bounds)
         imageView?.contentMode = .ScaleAspectFit
-        imageView?.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        imageView?.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+
         view.addSubview(imageView!)
+
         
+
         let tapRecognizer = UITapGestureRecognizer()
+
         tapRecognizer.numberOfTapsRequired = 1
+
         tapRecognizer.addTarget(self, action: "toggleFullscreen")
+
         view.addGestureRecognizer(tapRecognizer)
+
     }
+
     
-    required init(coder aDecoder: NSCoder) {
+
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
