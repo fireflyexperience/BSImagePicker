@@ -325,38 +325,26 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
     // MARK: Traits
 
-    override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
-
+    override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?)
+    {
         super.traitCollectionDidChange(previousTraitCollection)
 
-        
-
-        if let collectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout, let collectionViewWidth = collectionView?.bounds.size.width, photosDataSource = photosDataSource {
-
+        if let
+            collectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout,
+            collectionViewWidth = collectionView?.bounds.size.width
+        {
             let itemSpacing: CGFloat = 1.0
-
             let cellsPerRow = settings.cellsPerRow(verticalSize: traitCollection.verticalSizeClass, horizontalSize: traitCollection.horizontalSizeClass)
 
-            
-
             collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
-
             collectionViewFlowLayout.minimumLineSpacing = itemSpacing
 
-            
-
             let width = (collectionViewWidth / CGFloat(cellsPerRow)) - itemSpacing
-
             let itemSize =  CGSize(width: width, height: width)
-
             
-
             collectionViewFlowLayout.itemSize = itemSize
-
             photoCellFactory.imageSize = itemSize
-
         }
-
     }
 
     
