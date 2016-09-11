@@ -24,10 +24,10 @@ import UIKit
 import Photos
 
 final class PhotosViewController : UICollectionViewController, UIPopoverPresentationControllerDelegate, UITableViewDelegate, UINavigationControllerDelegate, SelectableDataDelegate {
-    var selectionClosure: ((asset: PHAsset) -> Void)?
-    var deselectionClosure: ((asset: PHAsset) -> Void)?
-    var cancelClosure: ((assets: [PHAsset]) -> Void)?
-    var finishClosure: ((assets: [PHAsset]) -> Void)?
+    var selectionClosure: ((PHAsset) -> Void)?
+    var deselectionClosure: ((PHAsset) -> Void)?
+    var cancelClosure: (([PHAsset]) -> Void)?
+    var finishClosure: (([PHAsset]) -> Void)?
     
     var doneBarButton: UIBarButtonItem?
     var cancelBarButton: UIBarButtonItem?
@@ -121,13 +121,13 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
         doneBarButton?.target = self
 
-        doneBarButton?.action = Selector("doneButtonPressed:")
+        doneBarButton?.action = #selector(PhotosViewController.doneButtonPressed(_:))
 
         cancelBarButton?.target = self
 
-        cancelBarButton?.action = Selector("cancelButtonPressed:")
+        cancelBarButton?.action = #selector(PhotosViewController.cancelButtonPressed(_:))
 
-        albumTitleView?.albumButton.addTarget(self, action: Selector("albumButtonPressed:"), forControlEvents: .TouchUpInside)
+        albumTitleView?.albumButton.addTarget(self, action: #selector(PhotosViewController.albumButtonPressed(_:)), forControlEvents: .TouchUpInside)
 
         navigationItem.leftBarButtonItem = cancelBarButton
 
@@ -149,7 +149,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
         // Add long press recognizer
 
-        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: "collectionViewLongPressed:")
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(PhotosViewController.collectionViewLongPressed(_:)))
 
         longPressRecognizer.minimumPressDuration = 0.5
 
@@ -187,7 +187,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
             dispatch_async(dispatch_get_global_queue(0, 0), { () -> Void in
 
-                closure(assets: assets)
+                closure(assets)
 
             })
 
@@ -207,7 +207,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
             dispatch_async(dispatch_get_global_queue(0, 0), { () -> Void in
 
-                closure(assets: assets)
+                closure(assets)
 
             })
 
@@ -331,7 +331,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
         if let
             collectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout,
-            collectionViewWidth = collectionView?.bounds.size.width
+            let collectionViewWidth = collectionView?.bounds.size.width
         {
             let itemSpacing: CGFloat = 1.0
             let cellsPerRow = settings.cellsPerRow(verticalSize: traitCollection.verticalSizeClass, horizontalSize: traitCollection.horizontalSizeClass)
@@ -447,7 +447,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
             dispatch_async(dispatch_get_global_queue(0, 0), { () -> Void in
 
-                closure(asset: asset)
+                closure(asset)
 
             })
 
@@ -493,7 +493,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
             dispatch_async(dispatch_get_global_queue(0, 0), { () -> Void in
 
-                closure(asset: asset)
+                closure(asset)
 
             })
 

@@ -8,36 +8,36 @@
 
 /* Begin PBXBuildFile section */
 		B8811DFD1BB175DC00323BFB /* BSImagePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = B8811DFC1BB175DC00323BFB /* BSImagePicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B8811E3B1BB175EC00323BFB /* Albums.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8811E151BB175EC00323BFB /* Albums.storyboard */; settings = {ASSET_TAGS = (); }; };
-		B8811E3C1BB175EC00323BFB /* AlbumTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8811E161BB175EC00323BFB /* AlbumTitleView.xib */; settings = {ASSET_TAGS = (); }; };
-		B8811E3D1BB175EC00323BFB /* arrow_down@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B8811E171BB175EC00323BFB /* arrow_down@1x.png */; settings = {ASSET_TAGS = (); }; };
-		B8811E3E1BB175EC00323BFB /* arrow_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B8811E181BB175EC00323BFB /* arrow_down@2x.png */; settings = {ASSET_TAGS = (); }; };
-		B8811E3F1BB175EC00323BFB /* arrow_down@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B8811E191BB175EC00323BFB /* arrow_down@3x.png */; settings = {ASSET_TAGS = (); }; };
-		B8811E401BB175EC00323BFB /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8811E1A1BB175EC00323BFB /* PhotoCell.xib */; settings = {ASSET_TAGS = (); }; };
-		B8811E421BB175EC00323BFB /* AlbumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E1E1BB175EC00323BFB /* AlbumsViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		B8811E431BB175EC00323BFB /* BSImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E1F1BB175EC00323BFB /* BSImagePickerViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		B8811E441BB175EC00323BFB /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E201BB175EC00323BFB /* PhotosViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		B8811E451BB175EC00323BFB /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E211BB175EC00323BFB /* PreviewViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		B8811E461BB175EC00323BFB /* ZoomAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E221BB175EC00323BFB /* ZoomAnimator.swift */; settings = {ASSET_TAGS = (); }; };
-		B8811E471BB175EC00323BFB /* UIButton+NoAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E241BB175EC00323BFB /* UIButton+NoAnimation.swift */; settings = {ASSET_TAGS = (); }; };
-		B8811E481BB175EC00323BFB /* UIViewController+BSImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E251BB175EC00323BFB /* UIViewController+BSImagePicker.swift */; settings = {ASSET_TAGS = (); }; };
-		B8811E491BB175EC00323BFB /* AlbumCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E271BB175EC00323BFB /* AlbumCellFactory.swift */; settings = {ASSET_TAGS = (); }; };
-		B8811E4A1BB175EC00323BFB /* PhotoCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E281BB175EC00323BFB /* PhotoCellFactory.swift */; settings = {ASSET_TAGS = (); }; };
-		B8811E4B1BB175EC00323BFB /* AssetCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E2A1BB175EC00323BFB /* AssetCollectionDataSource.swift */; settings = {ASSET_TAGS = (); }; };
-		B8811E4C1BB175EC00323BFB /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E2B1BB175EC00323BFB /* CollectionViewDataSource.swift */; settings = {ASSET_TAGS = (); }; };
-		B8811E4D1BB175EC00323BFB /* FetchResultsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E2C1BB175EC00323BFB /* FetchResultsDataSource.swift */; settings = {ASSET_TAGS = (); }; };
-		B8811E4E1BB175EC00323BFB /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E2D1BB175EC00323BFB /* Settings.swift */; settings = {ASSET_TAGS = (); }; };
-		B8811E4F1BB175EC00323BFB /* TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E2E1BB175EC00323BFB /* TableViewDataSource.swift */; settings = {ASSET_TAGS = (); }; };
-		B8811E501BB175EC00323BFB /* BSImagePickerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E301BB175EC00323BFB /* BSImagePickerSettings.swift */; settings = {ASSET_TAGS = (); }; };
-		B8811E511BB175EC00323BFB /* CollectionViewCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E311BB175EC00323BFB /* CollectionViewCellFactory.swift */; settings = {ASSET_TAGS = (); }; };
-		B8811E521BB175EC00323BFB /* SelectableDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E321BB175EC00323BFB /* SelectableDataDelegate.swift */; settings = {ASSET_TAGS = (); }; };
-		B8811E531BB175EC00323BFB /* SelectableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E331BB175EC00323BFB /* SelectableDataSource.swift */; settings = {ASSET_TAGS = (); }; };
-		B8811E541BB175EC00323BFB /* TableViewCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E341BB175EC00323BFB /* TableViewCellFactory.swift */; settings = {ASSET_TAGS = (); }; };
-		B8811E551BB175EC00323BFB /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E361BB175EC00323BFB /* AlbumCell.swift */; settings = {ASSET_TAGS = (); }; };
-		B8811E561BB175EC00323BFB /* AlbumTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E371BB175EC00323BFB /* AlbumTitleView.swift */; settings = {ASSET_TAGS = (); }; };
-		B8811E571BB175EC00323BFB /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E381BB175EC00323BFB /* PhotoCell.swift */; settings = {ASSET_TAGS = (); }; };
-		B8811E581BB175EC00323BFB /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E391BB175EC00323BFB /* SelectionView.swift */; settings = {ASSET_TAGS = (); }; };
-		B8811E5C1BB176EC00323BFB /* UIImageViewModeScaleAspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E5A1BB176EC00323BFB /* UIImageViewModeScaleAspect.swift */; settings = {ASSET_TAGS = (); }; };
+		B8811E3B1BB175EC00323BFB /* Albums.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8811E151BB175EC00323BFB /* Albums.storyboard */; };
+		B8811E3C1BB175EC00323BFB /* AlbumTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8811E161BB175EC00323BFB /* AlbumTitleView.xib */; };
+		B8811E3D1BB175EC00323BFB /* arrow_down@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B8811E171BB175EC00323BFB /* arrow_down@1x.png */; };
+		B8811E3E1BB175EC00323BFB /* arrow_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B8811E181BB175EC00323BFB /* arrow_down@2x.png */; };
+		B8811E3F1BB175EC00323BFB /* arrow_down@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B8811E191BB175EC00323BFB /* arrow_down@3x.png */; };
+		B8811E401BB175EC00323BFB /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8811E1A1BB175EC00323BFB /* PhotoCell.xib */; };
+		B8811E421BB175EC00323BFB /* AlbumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E1E1BB175EC00323BFB /* AlbumsViewController.swift */; };
+		B8811E431BB175EC00323BFB /* BSImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E1F1BB175EC00323BFB /* BSImagePickerViewController.swift */; };
+		B8811E441BB175EC00323BFB /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E201BB175EC00323BFB /* PhotosViewController.swift */; };
+		B8811E451BB175EC00323BFB /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E211BB175EC00323BFB /* PreviewViewController.swift */; };
+		B8811E461BB175EC00323BFB /* ZoomAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E221BB175EC00323BFB /* ZoomAnimator.swift */; };
+		B8811E471BB175EC00323BFB /* UIButton+NoAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E241BB175EC00323BFB /* UIButton+NoAnimation.swift */; };
+		B8811E481BB175EC00323BFB /* UIViewController+BSImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E251BB175EC00323BFB /* UIViewController+BSImagePicker.swift */; };
+		B8811E491BB175EC00323BFB /* AlbumCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E271BB175EC00323BFB /* AlbumCellFactory.swift */; };
+		B8811E4A1BB175EC00323BFB /* PhotoCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E281BB175EC00323BFB /* PhotoCellFactory.swift */; };
+		B8811E4B1BB175EC00323BFB /* AssetCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E2A1BB175EC00323BFB /* AssetCollectionDataSource.swift */; };
+		B8811E4C1BB175EC00323BFB /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E2B1BB175EC00323BFB /* CollectionViewDataSource.swift */; };
+		B8811E4D1BB175EC00323BFB /* FetchResultsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E2C1BB175EC00323BFB /* FetchResultsDataSource.swift */; };
+		B8811E4E1BB175EC00323BFB /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E2D1BB175EC00323BFB /* Settings.swift */; };
+		B8811E4F1BB175EC00323BFB /* TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E2E1BB175EC00323BFB /* TableViewDataSource.swift */; };
+		B8811E501BB175EC00323BFB /* BSImagePickerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E301BB175EC00323BFB /* BSImagePickerSettings.swift */; };
+		B8811E511BB175EC00323BFB /* CollectionViewCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E311BB175EC00323BFB /* CollectionViewCellFactory.swift */; };
+		B8811E521BB175EC00323BFB /* SelectableDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E321BB175EC00323BFB /* SelectableDataDelegate.swift */; };
+		B8811E531BB175EC00323BFB /* SelectableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E331BB175EC00323BFB /* SelectableDataSource.swift */; };
+		B8811E541BB175EC00323BFB /* TableViewCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E341BB175EC00323BFB /* TableViewCellFactory.swift */; };
+		B8811E551BB175EC00323BFB /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E361BB175EC00323BFB /* AlbumCell.swift */; };
+		B8811E561BB175EC00323BFB /* AlbumTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E371BB175EC00323BFB /* AlbumTitleView.swift */; };
+		B8811E571BB175EC00323BFB /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E381BB175EC00323BFB /* PhotoCell.swift */; };
+		B8811E581BB175EC00323BFB /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E391BB175EC00323BFB /* SelectionView.swift */; };
+		B8811E5C1BB176EC00323BFB /* UIImageViewModeScaleAspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E5A1BB176EC00323BFB /* UIImageViewModeScaleAspect.swift */; };
 		B8811E641BB1821C00323BFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E631BB1821C00323BFB /* AppDelegate.swift */; };
 		B8811E661BB1821C00323BFB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8811E651BB1821C00323BFB /* ViewController.swift */; };
 		B8811E691BB1821C00323BFB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8811E671BB1821C00323BFB /* Main.storyboard */; };
@@ -328,14 +328,16 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Andy Bennett";
 				TargetAttributes = {
 					B8811DF81BB175DC00323BFB = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 					};
 					B8811E601BB1821C00323BFB = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -468,8 +470,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -516,8 +520,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -537,6 +543,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -548,6 +555,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -559,6 +567,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -566,6 +575,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -576,30 +586,33 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ly.firef.BSImagePicker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
 		B8811E871BB1821C00323BFB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ly.firef.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
 		B8811E881BB1821C00323BFB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ly.firef.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};

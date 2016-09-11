@@ -43,7 +43,7 @@ final class PreviewViewController : UIViewController {
 
         tapRecognizer.numberOfTapsRequired = 1
 
-        tapRecognizer.addTarget(self, action: "toggleFullscreen")
+        tapRecognizer.addTarget(self, action: #selector(PreviewViewController.toggleFullscreen))
 
         view.addGestureRecognizer(tapRecognizer)
 

@@ -51,18 +51,18 @@ import UIKit
         
         //// CheckedOval Drawing
         let checkedOvalPath = UIBezierPath(ovalInRect: CGRectMake(CGRectGetMinX(group) + floor(CGRectGetWidth(group) * 0.0 + 0.5), CGRectGetMinY(group) + floor(CGRectGetHeight(group) * 0.0 + 0.5), floor(CGRectGetWidth(group) * 1.0 + 0.5) - floor(CGRectGetWidth(group) * 0.0 + 0.5), floor(CGRectGetHeight(group) * 1.0 + 0.5) - floor(CGRectGetHeight(group) * 0.0 + 0.5)))
-        CGContextSaveGState(context)
-        CGContextSetShadowWithColor(context, shadow2Offset, shadow2BlurRadius, settings.selectionShadowColor.CGColor)
+        CGContextSaveGState(context!)
+        CGContextSetShadowWithColor(context!, shadow2Offset, shadow2BlurRadius, settings.selectionShadowColor.CGColor)
         settings.selectionFillColor.setFill()
         checkedOvalPath.fill()
-        CGContextRestoreGState(context)
+        CGContextRestoreGState(context!)
         
         settings.selectionStrokeColor.setStroke()
         checkedOvalPath.lineWidth = 1
         checkedOvalPath.stroke()
         
         //// Bezier Drawing (Picture Number)
-        CGContextSetFillColorWithColor(context, UIColor.whiteColor().CGColor)
+        CGContextSetFillColorWithColor(context!, UIColor.whiteColor().CGColor)
         let size = selectionString.sizeWithAttributes(settings.selectionTextAttributes)
 
         selectionString.drawInRect(CGRectMake(CGRectGetMidX(checkmarkFrame) - size.width / 2.0,
