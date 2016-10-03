@@ -23,17 +23,17 @@
 import Photos
 
 final class AssetCollectionDataSource : NSObject, SelectableDataSource {
-    private var assetCollection: PHAssetCollection
+    fileprivate var assetCollection: PHAssetCollection
     var selections: [PHObject] = []
     
     var delegate: SelectableDataDelegate?
     var allowsMultipleSelection: Bool = false
     var maxNumberOfSelections: Int = 1
     
-    var selectedIndexPaths: [NSIndexPath] {
+    var selectedIndexPaths: [IndexPath] {
         get {
             if selections.count > 0 {
-                return [NSIndexPath(forItem: 0, inSection: 0)]
+                return [IndexPath(item: 0, section: 0)]
             } else {
                 return []
             }
@@ -53,27 +53,27 @@ final class AssetCollectionDataSource : NSObject, SelectableDataSource {
         }
     }
     
-    func numberOfObjectsInSection(section: Int) -> Int {
+    func numberOfObjectsInSection(_ section: Int) -> Int {
         return 1
     }
     
-    func objectAtIndexPath(indexPath: NSIndexPath) -> PHObject {
-        assert(indexPath.section < 1 && indexPath.row < 1, "AssetCollectionDataSource can only contain 1 section and row")
+    func objectAtIndexPath(_ indexPath: IndexPath) -> PHObject {
+        assert((indexPath as NSIndexPath).section < 1 && (indexPath as NSIndexPath).row < 1, "AssetCollectionDataSource can only contain 1 section and row")
         return assetCollection
     }
     
-    func selectObjectAtIndexPath(indexPath: NSIndexPath) {
-        assert(indexPath.section < 1 && indexPath.row < 1, "AssetCollectionDataSource can only contain 1 section and row")
+    func selectObjectAtIndexPath(_ indexPath: IndexPath) {
+        assert((indexPath as NSIndexPath).section < 1 && (indexPath as NSIndexPath).row < 1, "AssetCollectionDataSource can only contain 1 section and row")
         selections = [assetCollection]
     }
     
-    func deselectObjectAtIndexPath(indexPath: NSIndexPath) {
-        assert(indexPath.section < 1 && indexPath.row < 1, "AssetCollectionDataSource can only contain 1 section and row")
+    func deselectObjectAtIndexPath(_ indexPath: IndexPath) {
+        assert((indexPath as NSIndexPath).section < 1 && (indexPath as NSIndexPath).row < 1, "AssetCollectionDataSource can only contain 1 section and row")
         selections = []
     }
     
-    func isObjectAtIndexPathSelected(indexPath: NSIndexPath) -> Bool {
-        assert(indexPath.section < 1 && indexPath.row < 1, "AssetCollectionDataSource can only contain 1 section and row")
+    func isObjectAtIndexPathSelected(_ indexPath: IndexPath) -> Bool {
+        assert((indexPath as NSIndexPath).section < 1 && (indexPath as NSIndexPath).row < 1, "AssetCollectionDataSource can only contain 1 section and row")
         return selections.count > 0
     }
 }

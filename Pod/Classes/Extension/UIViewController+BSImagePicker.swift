@@ -44,7 +44,7 @@ public extension UIViewController {
 
         - parameter completion: presentation completed closure or nil
     */
-    func bs_presentImagePickerController(imagePicker: BSImagePickerViewController, animated: Bool, select: ((asset: PHAsset) -> Void)?, deselect: ((asset: PHAsset) -> Void)?, cancel: (([PHAsset]) -> Void)?, finish: (([PHAsset]) -> Void)?, completion: (() -> Void)?) {
+    func bs_presentImagePickerController(_ imagePicker: BSImagePickerViewController, animated: Bool, select: ((_ asset: PHAsset) -> Void)?, deselect: ((_ asset: PHAsset) -> Void)?, cancel: (([PHAsset]) -> Void)?, finish: (([PHAsset]) -> Void)?, completion: (() -> Void)?) {
         BSImagePickerViewController.authorize(fromViewController: self) { () -> Void in
             // Set blocks
             imagePicker.selectionClosure = select
@@ -53,7 +53,7 @@ public extension UIViewController {
             imagePicker.finishClosure = finish
             
             // Present
-            self.presentViewController(imagePicker, animated: animated, completion: completion)
+            self.present(imagePicker, animated: animated, completion: completion)
         }
     }
 }

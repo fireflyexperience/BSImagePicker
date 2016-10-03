@@ -40,11 +40,11 @@ public protocol SelectableDataSource : NSObjectProtocol {
     /**
     Number of objects for a given section.
     */
-    func numberOfObjectsInSection(section: Int) -> Int
+    func numberOfObjectsInSection(_ section: Int) -> Int
     /**
     Get object at given index path.
     */
-    func objectAtIndexPath(indexPath: NSIndexPath) -> PHObject
+    func objectAtIndexPath(_ indexPath: IndexPath) -> PHObject
     
     /**
     Does this data source allow multiple selection?. 
@@ -63,18 +63,18 @@ public protocol SelectableDataSource : NSObjectProtocol {
     /**
     Index paths for all selections
     */
-    var selectedIndexPaths: [NSIndexPath] { get }
+    var selectedIndexPaths: [IndexPath] { get }
     
     /**
     Select an object
     */
-    func selectObjectAtIndexPath(indexPath: NSIndexPath)
+    func selectObjectAtIndexPath(_ indexPath: IndexPath)
     /**
     Deselect an object
     */
-    func deselectObjectAtIndexPath(indexPath: NSIndexPath)
+    func deselectObjectAtIndexPath(_ indexPath: IndexPath)
     /**
     Check if selected
     */
-    func isObjectAtIndexPathSelected(indexPath: NSIndexPath) -> Bool
+    func isObjectAtIndexPathSelected(_ indexPath: IndexPath) -> Bool
 }

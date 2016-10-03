@@ -38,5 +38,5 @@ public protocol SelectableDataDelegate {
 
     - parameter changes: Index paths with changes
     */
-    func didUpdateData(dataSource: SelectableDataSource, incrementalChange: Bool, insertions: [NSIndexPath], deletions: [NSIndexPath], changes: [NSIndexPath])
+    func didUpdateData(_ dataSource: SelectableDataSource, incrementalChange: Bool, insertions: [IndexPath], deletions: [IndexPath], changes: [IndexPath])
 }

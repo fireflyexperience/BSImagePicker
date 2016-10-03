@@ -22,7 +22,7 @@ class UIImageViewModeScaleAspect: UIView {
     var newFrameWrapper: CGRect?
     var newFrameImg: CGRect?
     
-    private var img: UIImageView?
+    fileprivate var img: UIImageView?
     
     override var contentMode: UIViewContentMode {
         get {
@@ -47,7 +47,7 @@ class UIImageViewModeScaleAspect: UIView {
         }
         set {
             super.frame = newValue
-            self.img?.frame = CGRectMake(0, 0, newValue.size.width, newValue.size.height)
+            self.img?.frame = CGRect(x: 0, y: 0, width: newValue.size.width, height: newValue.size.height)
         }
     }
     
@@ -59,7 +59,7 @@ class UIImageViewModeScaleAspect: UIView {
     *  @return self
     */
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         self.setup()
     }
     
@@ -85,9 +85,9 @@ class UIImageViewModeScaleAspect: UIView {
     }
     
     func setup() {
-        let img = UIImageView(frame: CGRectMake(0, 0, self.frame.size.width, self.frame.size.height))
-        img.contentMode = .Center
-        self.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        let img = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height))
+        img.contentMode = .center
+        self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.addSubview(img)
         
         self.clipsToBounds = true
@@ -104,12 +104,12 @@ class UIImageViewModeScaleAspect: UIView {
     *  @param duration
     *  @param delay
     */
-    func animateToScaleAspectFitToFrame(frame: CGRect, duration: NSTimeInterval, delay: NSTimeInterval)
+    func animateToScaleAspectFitToFrame(_ frame: CGRect, duration: TimeInterval, delay: TimeInterval)
     {
         if let _ = self.image {
             self.initToScaleAspectFitToFrame(frame)
             
-            UIView.animateWithDuration(duration, delay: delay, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+            UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.allowUserInteraction, animations: { () -> Void in
                 self.animaticToScaleAspectFit()
             }, completion: nil)
 
@@ -125,12 +125,12 @@ class UIImageViewModeScaleAspect: UIView {
     *  @param duration
     *  @param delay
     */
-    func animateToScaleAspectFillToFrame(frame: CGRect, duration: NSTimeInterval, delay: NSTimeInterval)
+    func animateToScaleAspectFillToFrame(_ frame: CGRect, duration: TimeInterval, delay: TimeInterval)
     {
         if let _ = self.image {
             self.initToScaleAspectFitToFrame(frame)
 
-            UIView.animateWithDuration(duration, delay: delay, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+            UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.allowUserInteraction, animations: { () -> Void in
                 self.animaticToScaleAspectFit()
             }, completion: { (complete) -> Void in
                 self.animateFinishToScaleAspectFill()
@@ -148,12 +148,12 @@ class UIImageViewModeScaleAspect: UIView {
     *  @param delay
     *  @param completion
     */
-    func animateToScaleAspectFitToFrame(frame: CGRect, duration: NSTimeInterval, delay: NSTimeInterval, completion: (Bool -> Void)?)
+    func animateToScaleAspectFitToFrame(_ frame: CGRect, duration: TimeInterval, delay: TimeInterval, completion: ((Bool) -> Void)?)
     {
         if let _ = self.image {
             self.initToScaleAspectFitToFrame(frame)
             
-            UIView.animateWithDuration(duration, delay: delay, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+            UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.allowUserInteraction, animations: { () -> Void in
                 self.animaticToScaleAspectFit()
             }, completion: { (complete) -> Void in
                 if let completion = completion {
@@ -177,12 +177,12 @@ class UIImageViewModeScaleAspect: UIView {
     *  @param delay
     *  @param completion
     */
-    func animateToScaleAspectFillToFrame(frame: CGRect, duration: NSTimeInterval, delay: NSTimeInterval, completion: (Bool -> Void)?)
+    func animateToScaleAspectFillToFrame(_ frame: CGRect, duration: TimeInterval, delay: TimeInterval, completion: ((Bool) -> Void)?)
     {
         if let _ = self.image {
             self.initToScaleAspectFillToFrame(frame)
             
-            UIView.animateWithDuration(duration, delay: delay, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+            UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.allowUserInteraction, animations: { () -> Void in
                 self.animaticToScaleAspectFill()
             }, completion: { (complete) -> Void in
                 self.animateFinishToScaleAspectFill()
@@ -209,7 +209,7 @@ class UIImageViewModeScaleAspect: UIView {
     *
     *  @param newFrame
     */
-    func initToScaleAspectFitToFrame(newFrame: CGRect)
+    func initToScaleAspectFitToFrame(_ newFrame: CGRect)
     {
         guard let img = self.img else {
             return
@@ -217,17 +217,17 @@ class UIImageViewModeScaleAspect: UIView {
         
         if let ratioImg = imgRatio() {
             if self.choiseFunctionWithRationImg(ratioImg, newFrame: self.frame) {
-                img.frame = CGRectMake( -(self.frame.size.height * ratioImg - self.frame.size.width) / 2.0, 0, self.frame.size.height * ratioImg, self.frame.size.height);
+                img.frame = CGRect( x: -(self.frame.size.height * ratioImg - self.frame.size.width) / 2.0, y: 0, width: self.frame.size.height * ratioImg, height: self.frame.size.height);
             }else{
-                img.frame = CGRectMake(0, -(self.frame.size.width / ratioImg - self.frame.size.height) / 2.0, self.frame.size.width, self.frame.size.width / ratioImg);
+                img.frame = CGRect(x: 0, y: -(self.frame.size.width / ratioImg - self.frame.size.height) / 2.0, width: self.frame.size.width, height: self.frame.size.width / ratioImg);
             }
         } else {
             print("ERROR, UIImageView %@ don't have UIImage", self)
         }
         
-        self.contentMode = .ScaleAspectFit
+        self.contentMode = .scaleAspectFit
         
-        self.newFrameImg = CGRectMake(0, 0, newFrame.size.width, newFrame.size.height)
+        self.newFrameImg = CGRect(x: 0, y: 0, width: newFrame.size.width, height: newFrame.size.height)
         self.newFrameWrapper = newFrame
     }
     
@@ -244,13 +244,13 @@ class UIImageViewModeScaleAspect: UIView {
     *
     *  @param newFrame
     */
-    func initToScaleAspectFillToFrame(newFrame: CGRect)
+    func initToScaleAspectFillToFrame(_ newFrame: CGRect)
     {
         if let ratioImg = imgRatio() {
             if self.choiseFunctionWithRationImg(ratioImg, newFrame: self.frame) {
-                self.newFrameImg = CGRectMake( -(newFrame.size.height * ratioImg - newFrame.size.width) / 2.0, 0, newFrame.size.height * ratioImg, newFrame.size.height);
+                self.newFrameImg = CGRect( x: -(newFrame.size.height * ratioImg - newFrame.size.width) / 2.0, y: 0, width: newFrame.size.height * ratioImg, height: newFrame.size.height);
             }else{
-                self.newFrameImg = CGRectMake(0, -(newFrame.size.width / ratioImg - newFrame.size.height) / 2.0, newFrame.size.width, newFrame.size.width / ratioImg);
+                self.newFrameImg = CGRect(x: 0, y: -(newFrame.size.width / ratioImg - newFrame.size.height) / 2.0, width: newFrame.size.width, height: newFrame.size.width / ratioImg);
             }
         }else{
             print("ERROR, UIImageView %@ don't have UIImage", self)
@@ -317,13 +317,13 @@ class UIImageViewModeScaleAspect: UIView {
             return
         }
         
-        img.contentMode = .ScaleAspectFill;
-        img.frame  = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+        img.contentMode = .scaleAspectFill;
+        img.frame  = CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height);
     }
     
     // MARK: Private
     
-    func choiseFunctionWithRationImg(ratioImg: CGFloat, newFrame: CGRect) -> Bool
+    func choiseFunctionWithRationImg(_ ratioImg: CGFloat, newFrame: CGRect) -> Bool
     {
         var resultat = false
         let ratioSelf = (newFrame.size.width) / (newFrame.size.height);

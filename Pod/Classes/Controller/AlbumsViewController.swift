@@ -27,10 +27,10 @@ final class AlbumsViewController: UITableViewController {
         super.loadView()
         
         // Add a little bit of blur to the background
-        let visualEffectView = UIVisualEffectView(effect: UIVibrancyEffect(forBlurEffect: UIBlurEffect(style: .Light)))
+        let visualEffectView = UIVisualEffectView(effect: UIVibrancyEffect(blurEffect: UIBlurEffect(style: .light)))
         visualEffectView.frame = tableView.bounds
-        visualEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        visualEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         tableView.backgroundView = visualEffectView
-        tableView.backgroundColor = UIColor.clearColor()
+        tableView.backgroundColor = UIColor.clear
     }
 }
