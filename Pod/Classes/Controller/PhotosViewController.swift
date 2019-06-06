@@ -22,6 +22,17 @@
 
 import UIKit
 import Photos
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 final class PhotosViewController : UICollectionViewController, UIPopoverPresentationControllerDelegate, UITableViewDelegate, UINavigationControllerDelegate, SelectableDataDelegate {
     var selectionClosure: ((PHAsset) -> Void)?
@@ -33,24 +44,24 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
     var cancelBarButton: UIBarButtonItem?
     var albumTitleView: AlbumTitleView?
     
-    private let expandAnimator = ZoomAnimator()
-    private let shrinkAnimator = ZoomAnimator()
+    fileprivate let expandAnimator = ZoomAnimator()
+    fileprivate let shrinkAnimator = ZoomAnimator()
     
-    private var photosDataSource: CollectionViewDataSource?
-    private var albumsDataSource: TableViewDataSource
+    fileprivate var photosDataSource: CollectionViewDataSource?
+    fileprivate var albumsDataSource: TableViewDataSource
     
-    private let photoCellFactory = PhotoCellFactory()
-    private let albumCellFactory = AlbumCellFactory()
+    fileprivate let photoCellFactory = PhotoCellFactory()
+    fileprivate let albumCellFactory = AlbumCellFactory()
     
-    private let settings: BSImagePickerSettings
+    fileprivate let settings: BSImagePickerSettings
     
-    private var doneBarButtonTitle: String?
+    fileprivate var doneBarButtonTitle: String?
     
-    private lazy var albumsViewController: AlbumsViewController? = {
+    fileprivate lazy var albumsViewController: AlbumsViewController? = {
         let storyboard = UIStoryboard(name: "Albums", bundle: BSImagePickerViewController.bundle)
         
         let vc = storyboard.instantiateInitialViewController() as? AlbumsViewController
-        vc?.modalPresentationStyle = .Popover
+        vc?.modalPresentationStyle = .popover
         vc?.preferredContentSize = CGSize(width: 320, height: 300)
         vc?.tableView.dataSource = self.albumsDataSource
         vc?.tableView.delegate = self
@@ -58,7 +69,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
         return vc
     }()
     
-    private lazy var previewViewContoller: PreviewViewController? = {
+    fileprivate lazy var previewViewContoller: PreviewViewController? = {
         return PreviewViewController(nibName: nil, bundle: nil)
     }()
     
@@ -71,7 +82,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
         albumsDataSource.data.delegate = self
         
         // Default is to have first album selected
-        albumsDataSource.data.selectObjectAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
+        albumsDataSource.data.selectObjectAtIndexPath(IndexPath(row: 0, section: 0))
         
         if let album = albumsDataSource.data.selections.first as? PHAssetCollection {
             initializePhotosDataSource(album)
@@ -105,7 +116,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
         // TODO: Settings
 
-        collectionView?.backgroundColor = UIColor.whiteColor()
+        collectionView?.backgroundColor = UIColor.white
 
         photoCellFactory.registerCellIdentifiersForCollectionView(collectionView)
 
@@ -127,7 +138,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
         cancelBarButton?.action = #selector(PhotosViewController.cancelButtonPressed(_:))
 
-        albumTitleView?.albumButton.addTarget(self, action: #selector(PhotosViewController.albumButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        albumTitleView?.albumButton.addTarget(self, action: #selector(PhotosViewController.albumButtonPressed(_:)), for: .touchUpInside)
 
         navigationItem.leftBarButtonItem = cancelBarButton
 
@@ -167,7 +178,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
     // MARK: Appear/Disappear
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
 
         super.viewWillAppear(animated)
 
@@ -181,11 +192,10 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
     // MARK: Button actions
 
-    func cancelButtonPressed(sender: UIBarButtonItem) {
+    func cancelButtonPressed(_ sender: UIBarButtonItem) {
 
         if let closure = cancelClosure, let assets = photosDataSource?.data.selections as? [PHAsset] {
-
-            dispatch_async(dispatch_get_global_queue(0, 0), { () -> Void in
+            DispatchQueue.global(qos: .background).async(execute: { () -> Void in
 
                 closure(assets)
 
@@ -195,17 +205,17 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
         
 
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
 
     }
 
     
 
-    func doneButtonPressed(sender: UIBarButtonItem) {
+    func doneButtonPressed(_ sender: UIBarButtonItem) {
 
         if let closure = finishClosure, let assets = photosDataSource?.data.selections as? [PHAsset] {
 
-            dispatch_async(dispatch_get_global_queue(0, 0), { () -> Void in
+            DispatchQueue.global(qos: .background).async(execute: { () -> Void in
 
                 closure(assets)
 
@@ -215,21 +225,21 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
         
 
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
 
     }
 
     
 
-    func albumButtonPressed(sender: UIButton) {
+    func albumButtonPressed(_ sender: UIButton) {
 
         if let albumsViewController = albumsViewController, let popVC = albumsViewController.popoverPresentationController {
 
-            popVC.permittedArrowDirections = .Up
+            popVC.permittedArrowDirections = .up
 
             popVC.sourceView = sender
 
-            let senderRect = sender.convertRect(sender.frame, fromView: sender.superview)
+            let senderRect = sender.convert(sender.frame, from: sender.superview)
 
             let sourceRect = CGRect(x: senderRect.origin.x, y: senderRect.origin.y + (sender.frame.size.height / 2), width: senderRect.size.width, height: senderRect.size.height)
 
@@ -241,7 +251,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
             
 
-            presentViewController(albumsViewController, animated: true, completion: nil)
+            present(albumsViewController, animated: true, completion: nil)
 
         }
 
@@ -249,33 +259,33 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
     
 
-    func collectionViewLongPressed(sender: UIGestureRecognizer) {
+    func collectionViewLongPressed(_ sender: UIGestureRecognizer) {
 
-        if sender.state == .Began {
+        if sender.state == .began {
 
             // Disable recognizer while we are figuring out location and pushing preview
 
-            sender.enabled = false
+            sender.isEnabled = false
 
-            collectionView?.userInteractionEnabled = false
+            collectionView?.isUserInteractionEnabled = false
 
             
 
             // Calculate which index path long press came from
 
-            let location = sender.locationInView(collectionView)
+            let location = sender.location(in: collectionView)
 
-            let indexPath = collectionView?.indexPathForItemAtPoint(location)
+            let indexPath = collectionView?.indexPathForItem(at: location)
 
             
 
-            if let vc = previewViewContoller, let indexPath = indexPath, let cell = collectionView?.cellForItemAtIndexPath(indexPath) as? PhotoCell, let asset = cell.asset {
+            if let vc = previewViewContoller, let indexPath = indexPath, let cell = collectionView?.cellForItem(at: indexPath) as? PhotoCell, let asset = cell.asset {
 
                 // Setup fetch options to be synchronous
 
                 let options = PHImageRequestOptions()
 
-                options.synchronous = true
+                options.isSynchronous = true
 
                 
 
@@ -283,7 +293,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
                 if let imageView = vc.imageView {
 
-                    PHCachingImageManager.defaultManager().requestImageForAsset(asset, targetSize:imageView.frame.size, contentMode: .AspectFit, options: options) { (result, _) in
+                    PHCachingImageManager.default().requestImage(for: asset, targetSize:imageView.frame.size, contentMode: .aspectFit, options: options) { (result, _) in
 
                         imageView.image = result
 
@@ -313,9 +323,9 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
             // Re-enable recognizer
 
-            sender.enabled = true
+            sender.isEnabled = true
 
-            collectionView?.userInteractionEnabled = true
+            collectionView?.isUserInteractionEnabled = true
 
         }
 
@@ -325,7 +335,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
     // MARK: Traits
 
-    override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?)
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?)
     {
         super.traitCollectionDidChange(previousTraitCollection)
 
@@ -334,7 +344,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
             let collectionViewWidth = collectionView?.bounds.size.width
         {
             let itemSpacing: CGFloat = 1.0
-            let cellsPerRow = settings.cellsPerRow(verticalSize: traitCollection.verticalSizeClass, horizontalSize: traitCollection.horizontalSizeClass)
+            let cellsPerRow = settings.cellsPerRow(traitCollection.verticalSizeClass, traitCollection.horizontalSizeClass)
 
             collectionViewFlowLayout.minimumInteritemSpacing = itemSpacing
             collectionViewFlowLayout.minimumLineSpacing = itemSpacing
@@ -351,15 +361,15 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
     // MARK: UIPopoverPresentationControllerDelegate
 
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
 
-        return .None
+        return .none
 
     }
 
     
 
-    func popoverPresentationControllerShouldDismissPopover(popoverPresentationController: UIPopoverPresentationController) -> Bool {
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
 
         return true
 
@@ -369,7 +379,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
     // MARK: UITableViewDelegate
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         // Update selected album
 
@@ -393,7 +403,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
         // Dismiss album selection
 
-        albumsViewController?.dismissViewControllerAnimated(true, completion: nil)
+        albumsViewController?.dismiss(animated: true, completion: nil)
 
     }
 
@@ -401,7 +411,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
     // MARK: UICollectionViewDelegate
 
-    override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
 
         return photosDataSource?.data.selections.count < settings.maxNumberOfSelections
 
@@ -409,7 +419,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
     
 
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         // Select asset)
 
@@ -419,7 +429,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
         // Set selection number
 
-        if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? PhotoCell, let count = photosDataSource?.data.selections.count {
+        if let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell, let count = photosDataSource?.data.selections.count {
 
             if let selectionCharacter = settings.selectionCharacter {
 
@@ -445,7 +455,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
         if let closure = selectionClosure, let asset = photosDataSource?.data.objectAtIndexPath(indexPath) as? PHAsset {
 
-            dispatch_async(dispatch_get_global_queue(0, 0), { () -> Void in
+            DispatchQueue.global(qos: .background).async(execute: { () -> Void in
 
                 closure(asset)
 
@@ -457,7 +467,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
     
 
-    override func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
 
         // Deselect asset
 
@@ -477,7 +487,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
             UIView.setAnimationsEnabled(false)
 
-            collectionView.reloadItemsAtIndexPaths(photosDataSource.data.selectedIndexPaths)
+            collectionView.reloadItems(at: photosDataSource.data.selectedIndexPaths as [IndexPath])
 
             syncSelectionInDataSource(photosDataSource.data, withCollectionView: collectionView)
 
@@ -491,7 +501,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
         if let closure = deselectionClosure, let asset = photosDataSource?.data.objectAtIndexPath(indexPath) as? PHAsset {
 
-            dispatch_async(dispatch_get_global_queue(0, 0), { () -> Void in
+            DispatchQueue.global(qos: .background).async(execute: { () -> Void in
 
                 closure(asset)
 
@@ -505,11 +515,11 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
     // MARK: Selectable data delegate
 
-    func didUpdateData(sender: SelectableDataSource, incrementalChange: Bool, insertions insert: [NSIndexPath], deletions delete: [NSIndexPath], changes change: [NSIndexPath]) {
+    func didUpdateData(_ sender: SelectableDataSource, incrementalChange: Bool, insertions insert: [IndexPath], deletions delete: [IndexPath], changes change: [IndexPath]) {
 
         // May come on a background thread, so dispatch to main
 
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        DispatchQueue.main.async(execute: { () -> Void in
 
             // Reload table view or collection view?
 
@@ -521,11 +531,11 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
                         // Update
 
-                        collectionView.deleteItemsAtIndexPaths(delete)
+                        collectionView.deleteItems(at: delete)
 
-                        collectionView.insertItemsAtIndexPaths(insert)
+                        collectionView.insertItems(at: insert)
 
-                        collectionView.reloadItemsAtIndexPaths(change)
+                        collectionView.reloadItems(at: change)
 
                     } else {
 
@@ -533,7 +543,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
                         collectionView.reloadData()
 
-                        collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: .None, animated: false)
+                        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: UICollectionViewScrollPosition(), animated: false)
 
                     }
 
@@ -555,11 +565,11 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
                     // Update
 
-                    self.albumsViewController?.tableView?.deleteRowsAtIndexPaths(delete, withRowAnimation: .Automatic)
+                    self.albumsViewController?.tableView?.deleteRows(at: delete, with: .automatic)
 
-                    self.albumsViewController?.tableView?.insertRowsAtIndexPaths(insert, withRowAnimation: .Automatic)
+                    self.albumsViewController?.tableView?.insertRows(at: insert, with: .automatic)
 
-                    self.albumsViewController?.tableView?.reloadRowsAtIndexPaths(change, withRowAnimation: .Automatic)
+                    self.albumsViewController?.tableView?.reloadRows(at: change, with: .automatic)
 
                 } else {
 
@@ -591,13 +601,13 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
                 for view in subViews {
 
-                    if let btn = view as? UIButton where checkIfRightButtonItem(btn) {
+                    if let btn = view as? UIButton , checkIfRightButtonItem(btn) {
 
                         // Store original title if we havn't got it
 
                         if doneBarButtonTitle == nil {
 
-                            doneBarButtonTitle = btn.titleForState(.Normal)
+                            doneBarButtonTitle = btn.title(for: UIControlState())
 
                         }
 
@@ -607,11 +617,11 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
                         if numberOfSelectedAssets > 0 {
 
-                            btn.bs_setTitleWithoutAnimation("\(doneBarButtonTitle!) (\(numberOfSelectedAssets))", forState: .Normal)
+                            btn.bs_setTitleWithoutAnimation("\(doneBarButtonTitle!) (\(numberOfSelectedAssets))", forState: UIControlState())
 
                         } else {
 
-                            btn.bs_setTitleWithoutAnimation(doneBarButtonTitle!, forState: .Normal)
+                            btn.bs_setTitleWithoutAnimation(doneBarButtonTitle!, forState: UIControlState())
 
                         }
 
@@ -633,11 +643,11 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
             if numberOfSelectedAssets > 0 {
 
-                doneBarButton?.enabled = true
+                doneBarButton?.isEnabled = true
 
             } else {
 
-                doneBarButton?.enabled = false
+                doneBarButton?.isEnabled = false
 
             }
 
@@ -651,7 +661,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
     // Somewhere along the road, our UIBarButtonItem gets transformed to an UINavigationButton
 
-    func checkIfRightButtonItem(btn: UIButton) -> Bool {
+    func checkIfRightButtonItem(_ btn: UIButton) -> Bool {
 
         var isRightButton = false
 
@@ -661,49 +671,49 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
             // Store previous values
 
-            let wasRightEnabled = rightButton.enabled
+            let wasRightEnabled = rightButton.isEnabled
 
-            let wasButtonEnabled = btn.enabled
+            let wasButtonEnabled = btn.isEnabled
             
             // Set a known state for both buttons
-            rightButton.enabled = false
-            btn.enabled = false
+            rightButton.isEnabled = false
+            btn.isEnabled = false
             
             // Change one and see if other also changes
-            rightButton.enabled = true
-            isRightButton = btn.enabled
+            rightButton.isEnabled = true
+            isRightButton = btn.isEnabled
             
             // Reset
-            rightButton.enabled = wasRightEnabled
-            btn.enabled = wasButtonEnabled
+            rightButton.isEnabled = wasRightEnabled
+            btn.isEnabled = wasButtonEnabled
         }
         
         return isRightButton
     }
     
-    func syncSelectionInDataSource(dataSource: SelectableDataSource, withCollectionView collectionView: UICollectionView) {
+    func syncSelectionInDataSource(_ dataSource: SelectableDataSource, withCollectionView collectionView: UICollectionView) {
         // Get indexpaths of selected assets
         let indexPaths = dataSource.selectedIndexPaths
         
         // Loop through them and set them as selected in the collection view
         for indexPath in indexPaths {
-            collectionView.selectItemAtIndexPath(indexPath, animated: false, scrollPosition: .None)
+            collectionView.selectItem(at: indexPath as IndexPath, animated: false, scrollPosition: UICollectionViewScrollPosition())
         }
     }
     
-    private func updateAlbumTitle(album: PHAssetCollection) {
+    fileprivate func updateAlbumTitle(_ album: PHAssetCollection) {
         // Update album title
         albumTitleView?.albumTitle = album.localizedTitle!
     }
     
-    private func initializePhotosDataSource(album: PHAssetCollection) {
+    fileprivate func initializePhotosDataSource(_ album: PHAssetCollection) {
         // Set up a photo data source with album
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [
             NSSortDescriptor(key: "creationDate", ascending: false)
         ]
-        fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.Image.rawValue)
-        let dataSource = FetchResultsDataSource(fetchResult: PHAsset.fetchAssetsInAssetCollection(album, options: fetchOptions))
+        fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
+        let dataSource = FetchResultsDataSource(fetchResult: PHAsset.fetchAssets(in: album, options: fetchOptions) as! PHFetchResult<PHObject>)
         let newDataSource = CollectionViewDataSource(dataSource: dataSource, cellFactory: photoCellFactory)
         
         // Keep selection
@@ -730,8 +740,8 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
     }
     
     // MARK: UINavigationControllerDelegate
-    func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        if operation == .Push {
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        if operation == .push {
             return expandAnimator
         } else {
             return shrinkAnimator

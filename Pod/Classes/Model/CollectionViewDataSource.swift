@@ -34,15 +34,15 @@ final class CollectionViewDataSource : NSObject, UICollectionViewDataSource {
         cellFactory = aCellFactory
     }
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return data.sections
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.numberOfObjectsInSection(section)
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return cellFactory.cellForIndexPath(indexPath, withDataSource: data, inCollectionView: collectionView)
     }
 }

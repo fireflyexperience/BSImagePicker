@@ -27,21 +27,21 @@ import Photos
 Cell factory for photos
 */
 final class PhotoCellFactory : CollectionViewCellFactory {
-    private let photoCellIdentifier = "photoCellIdentifier"
-    private let photosManager = PHCachingImageManager.defaultManager()
+    fileprivate let photoCellIdentifier = "photoCellIdentifier"
+    fileprivate let photosManager = PHCachingImageManager.default()
     
-    private let imageContentMode: PHImageContentMode = .AspectFill
+    fileprivate let imageContentMode: PHImageContentMode = .aspectFill
     
     var settings: BSImagePickerSettings?
-    var imageSize: CGSize = CGSizeZero
+    var imageSize: CGSize = CGSize.zero
     
-    func registerCellIdentifiersForCollectionView(collectionView: UICollectionView?) {
-        collectionView?.registerNib(UINib(nibName: "PhotoCell", bundle: BSImagePickerViewController.bundle), forCellWithReuseIdentifier: photoCellIdentifier)
+    func registerCellIdentifiersForCollectionView(_ collectionView: UICollectionView?) {
+        collectionView?.register(UINib(nibName: "PhotoCell", bundle: BSImagePickerViewController.bundle), forCellWithReuseIdentifier: photoCellIdentifier)
     }
     
-    func cellForIndexPath(indexPath: NSIndexPath, withDataSource dataSource: SelectableDataSource, inCollectionView collectionView: UICollectionView) -> UICollectionViewCell {
+    func cellForIndexPath(_ indexPath: IndexPath, withDataSource dataSource: SelectableDataSource, inCollectionView collectionView: UICollectionView) -> UICollectionViewCell {
         UIView.setAnimationsEnabled(false)
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(photoCellIdentifier, forIndexPath: indexPath) as! PhotoCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoCellIdentifier, for: indexPath) as! PhotoCell
         if let settings = settings {
             cell.settings = settings
         }
@@ -55,21 +55,21 @@ final class PhotoCellFactory : CollectionViewCellFactory {
             cell.asset = asset
             
             // Request image
-            cell.tag = Int(photosManager.requestImageForAsset(asset, targetSize: imageSize, contentMode: imageContentMode, options: nil) { (result, _) in
+            cell.tag = Int(photosManager.requestImage(for: asset, targetSize: imageSize, contentMode: imageContentMode, options: nil) { (result, _) in
                 cell.imageView.image = result
             })
             
             // Set selection number
-            if let index = dataSource.selections.indexOf(asset) {
+            if let index = dataSource.selections.index(of: asset) {
                 if let character = settings?.selectionCharacter {
                     cell.selectionString = String(character)
                 } else {
                     cell.selectionString = String(index + 1)
                 }
                 
-                cell.selected = true
+                cell.isSelected = true
             } else {
-                cell.selected = false
+                cell.isSelected = false
             }
         }
         

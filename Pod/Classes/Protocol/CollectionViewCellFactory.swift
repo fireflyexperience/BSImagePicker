@@ -33,7 +33,7 @@ protocol CollectionViewCellFactory {
 
     */
 
-    func registerCellIdentifiersForCollectionView(collectionView: UICollectionView?)
+    func registerCellIdentifiersForCollectionView(_ collectionView: UICollectionView?)
 
     /**
 
@@ -45,5 +45,5 @@ protocol CollectionViewCellFactory {
 
     - parameter inCollectionView: Collection view to show cell in.
     */
-    func cellForIndexPath(indexPath: NSIndexPath, withDataSource dataSource: SelectableDataSource, inCollectionView collectionView: UICollectionView) -> UICollectionViewCell
+    func cellForIndexPath(_ indexPath: IndexPath, withDataSource dataSource: SelectableDataSource, inCollectionView collectionView: UICollectionView) -> UICollectionViewCell
 }

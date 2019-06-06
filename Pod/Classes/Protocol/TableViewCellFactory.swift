@@ -33,5 +33,5 @@ protocol TableViewCellFactory {
 
     - parameter tableView: Table view that will show the cell
     */
-    func cellForIndexPath(indexPath: NSIndexPath, withDataSource dataSource: SelectableDataSource, inTableView tableView: UITableView) -> UITableViewCell
+    func cellForIndexPath(_ indexPath: IndexPath, withDataSource dataSource: SelectableDataSource, inTableView tableView: UITableView) -> UITableViewCell
 }
