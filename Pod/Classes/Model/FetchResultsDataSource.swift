@@ -112,7 +112,7 @@ final class FetchResultsDataSource : NSObject, SelectableDataSource, PHPhotoLibr
 
         let object = objectAtIndexPath(indexPath)
 
-        if let index = selections.index(of: object) {
+        if let index = selections.firstIndex(of: object) {
 
             selections.remove(at: index)
 
