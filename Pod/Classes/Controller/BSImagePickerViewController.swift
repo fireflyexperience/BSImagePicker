@@ -92,7 +92,7 @@ public final class BSImagePickerViewController : UINavigationController, BSImage
 
                 let settingsAction = UIAlertAction(title: NSLocalizedString("imagePickerNoCameraAccessSettingsButton", value: "Settings", comment: "Settings button title"), style: .default, handler: { (action) -> Void in
 
-                    let url = URL(string: UIApplicationOpenSettingsURLString)
+                    let url = URL(string: UIApplication.openSettingsURLString)
 
                     if let url = url , UIApplication.shared.canOpenURL(url) {
 

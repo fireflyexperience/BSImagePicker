@@ -192,7 +192,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
     // MARK: Button actions
 
-    func cancelButtonPressed(_ sender: UIBarButtonItem) {
+    @objc func cancelButtonPressed(_ sender: UIBarButtonItem) {
 
         if let closure = cancelClosure, let assets = photosDataSource?.data.selections as? [PHAsset] {
             DispatchQueue.global(qos: .background).async(execute: { () -> Void in
@@ -211,7 +211,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
     
 
-    func doneButtonPressed(_ sender: UIBarButtonItem) {
+    @objc func doneButtonPressed(_ sender: UIBarButtonItem) {
 
         if let closure = finishClosure, let assets = photosDataSource?.data.selections as? [PHAsset] {
 
@@ -231,7 +231,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
     
 
-    func albumButtonPressed(_ sender: UIButton) {
+    @objc func albumButtonPressed(_ sender: UIButton) {
 
         if let albumsViewController = albumsViewController, let popVC = albumsViewController.popoverPresentationController {
 
@@ -259,7 +259,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
     
 
-    func collectionViewLongPressed(_ sender: UIGestureRecognizer) {
+    @objc func collectionViewLongPressed(_ sender: UIGestureRecognizer) {
 
         if sender.state == .began {
 
@@ -543,7 +543,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
                         collectionView.reloadData()
 
-                        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: UICollectionViewScrollPosition(), animated: false)
+                        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: UICollectionView.ScrollPosition(), animated: false)
 
                     }
 
@@ -607,7 +607,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
                         if doneBarButtonTitle == nil {
 
-                            doneBarButtonTitle = btn.title(for: UIControlState())
+                            doneBarButtonTitle = btn.title(for: UIControl.State())
 
                         }
 
@@ -617,11 +617,11 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
 
                         if numberOfSelectedAssets > 0 {
 
-                            btn.bs_setTitleWithoutAnimation("\(doneBarButtonTitle!) (\(numberOfSelectedAssets))", forState: UIControlState())
+                            btn.bs_setTitleWithoutAnimation("\(doneBarButtonTitle!) (\(numberOfSelectedAssets))", forState: UIControl.State())
 
                         } else {
 
-                            btn.bs_setTitleWithoutAnimation(doneBarButtonTitle!, forState: UIControlState())
+                            btn.bs_setTitleWithoutAnimation(doneBarButtonTitle!, forState: UIControl.State())
 
                         }
 
@@ -697,7 +697,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
         
         // Loop through them and set them as selected in the collection view
         for indexPath in indexPaths {
-            collectionView.selectItem(at: indexPath as IndexPath, animated: false, scrollPosition: UICollectionViewScrollPosition())
+            collectionView.selectItem(at: indexPath as IndexPath, animated: false, scrollPosition: UICollectionView.ScrollPosition())
         }
     }
     
@@ -740,7 +740,7 @@ final class PhotosViewController : UICollectionViewController, UIPopoverPresenta
     }
     
     // MARK: UINavigationControllerDelegate
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         if operation == .push {
             return expandAnimator
         } else {

@@ -33,9 +33,9 @@ final class Settings : BSImagePickerSettings {
         paragraphStyle.lineBreakMode = .byTruncatingTail
         paragraphStyle.alignment = .center
         return [
-            NSFontAttributeName: UIFont.boldSystemFont(ofSize: 10.0),
-            NSParagraphStyleAttributeName: paragraphStyle,
-            NSForegroundColorAttributeName: UIColor.white
+            convertFromNSAttributedStringKey(NSAttributedString.Key.font): UIFont.boldSystemFont(ofSize: 10.0),
+            convertFromNSAttributedStringKey(NSAttributedString.Key.paragraphStyle): paragraphStyle,
+            convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor): UIColor.white
         ]
     }()
     var cellsPerRow: (_ verticalSize: UIUserInterfaceSizeClass, _ horizontalSize: UIUserInterfaceSizeClass) -> Int = {(verticalSize: UIUserInterfaceSizeClass, horizontalSize: UIUserInterfaceSizeClass) -> Int in
@@ -50,4 +50,9 @@ final class Settings : BSImagePickerSettings {
             return 3
         }
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
 }

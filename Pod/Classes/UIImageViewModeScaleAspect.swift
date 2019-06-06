@@ -24,7 +24,7 @@ class UIImageViewModeScaleAspect: UIView {
     
     fileprivate var img: UIImageView?
     
-    override var contentMode: UIViewContentMode {
+    override var contentMode: UIView.ContentMode {
         get {
             if let img = self.img {
                 return img.contentMode
@@ -109,7 +109,7 @@ class UIImageViewModeScaleAspect: UIView {
         if let _ = self.image {
             self.initToScaleAspectFitToFrame(frame)
             
-            UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.allowUserInteraction, animations: { () -> Void in
+            UIView.animate(withDuration: duration, delay: delay, options: UIView.AnimationOptions.allowUserInteraction, animations: { () -> Void in
                 self.animaticToScaleAspectFit()
             }, completion: nil)
 
@@ -130,7 +130,7 @@ class UIImageViewModeScaleAspect: UIView {
         if let _ = self.image {
             self.initToScaleAspectFitToFrame(frame)
 
-            UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.allowUserInteraction, animations: { () -> Void in
+            UIView.animate(withDuration: duration, delay: delay, options: UIView.AnimationOptions.allowUserInteraction, animations: { () -> Void in
                 self.animaticToScaleAspectFit()
             }, completion: { (complete) -> Void in
                 self.animateFinishToScaleAspectFill()
@@ -153,7 +153,7 @@ class UIImageViewModeScaleAspect: UIView {
         if let _ = self.image {
             self.initToScaleAspectFitToFrame(frame)
             
-            UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.allowUserInteraction, animations: { () -> Void in
+            UIView.animate(withDuration: duration, delay: delay, options: UIView.AnimationOptions.allowUserInteraction, animations: { () -> Void in
                 self.animaticToScaleAspectFit()
             }, completion: { (complete) -> Void in
                 if let completion = completion {
@@ -182,7 +182,7 @@ class UIImageViewModeScaleAspect: UIView {
         if let _ = self.image {
             self.initToScaleAspectFillToFrame(frame)
             
-            UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.allowUserInteraction, animations: { () -> Void in
+            UIView.animate(withDuration: duration, delay: delay, options: UIView.AnimationOptions.allowUserInteraction, animations: { () -> Void in
                 self.animaticToScaleAspectFill()
             }, completion: { (complete) -> Void in
                 self.animateFinishToScaleAspectFill()

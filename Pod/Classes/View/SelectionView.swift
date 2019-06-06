@@ -63,11 +63,17 @@ import UIKit
         
         //// Bezier Drawing (Picture Number)
         context!.setFillColor(UIColor.white.cgColor)
-        let size = selectionString.size(attributes: settings.selectionTextAttributes)
+        let size = selectionString.size(withAttributes: convertToOptionalNSAttributedStringKeyDictionary(settings.selectionTextAttributes))
 
         selectionString.draw(in: CGRect(x: checkmarkFrame.midX - size.width / 2.0,
             y: checkmarkFrame.midY - size.height / 2.0,
             width: size.width,
-            height: size.height), withAttributes: settings.selectionTextAttributes)
+            height: size.height), withAttributes: convertToOptionalNSAttributedStringKeyDictionary(settings.selectionTextAttributes))
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
 }
